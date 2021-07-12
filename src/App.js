@@ -19,7 +19,7 @@ const list = [
   },
 ];
 
-function List() {
+const List = () => {
   return (
     <ul>
         {list.map(function(item) {
@@ -38,16 +38,19 @@ function List() {
   );
 }
 
-function Search() {
+const Search = () => {
+  const handleChange = (event) => {
+    console.log(event.target.value);
+  }
   return (
     <div>
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" />
+      <input id="search" type="text" onChange={handleChange}/>
     </div>
   )
 }
 
-function App() {
+const App = () => {
   return (
     <div>
       <h1>My Hacker Stories</h1>
