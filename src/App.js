@@ -38,20 +38,10 @@ const Search = (props) => {
   // Props is arg which in this case is an event handler onSearch
   // Below const uses React.useState to set SearchTerm to initial state
   // "" and second arg is a function which updates the state setSearchTerm
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-    
-    props.onSearch(event);
-  }
   return (
     <div>
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={handleChange}/>
-
-      <p>
-        Search for <strong>{searchTerm}</strong>.
-      </p>
+      <input id="search" type="text" onChange={props.onSearch}/>
 
     </div>
   )
@@ -77,10 +67,15 @@ const App = () => {
     },
   ];
 
+  const[searchTerm, setSearchTerm] = React.useState("");
+  
   const handleSearch = (event) => {
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
   };
 
+  const searchedStories = stories.filter((story) =>
+    story.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <div>
       <h1>My Hacker Stories</h1>
@@ -89,7 +84,7 @@ const App = () => {
 
       <hr />
 
-      <List list={stories} />
+      <List list={searchedStories} />
 
     </div>
   );
