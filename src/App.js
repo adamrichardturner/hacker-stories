@@ -1,5 +1,10 @@
 import * as React from 'react';
 
+// Component that takes props as argument 
+// using map it renders the Item component
+// HTML with props arg (stories) each object
+// property displayed.
+
 const List = (props) => {
   return(
     <ul>
@@ -9,6 +14,10 @@ const List = (props) => {
   </ul>
   )
 }
+
+// Item takes props as argument (in this case stories) 
+// and returns the url, title, author, comments and points
+// of each object prop values in stories.
 
 const Item = (props) => {
   return(
@@ -22,10 +31,18 @@ const Item = (props) => {
   )
 }
 
-const Search = () => {
+// Search takes props as arg onSearch={handleSearch}
+// Logging the search term beneath the input field
+
+const Search = (props) => {
+  // Props is arg which in this case is an event handler onSearch
+  // Below const uses React.useState to set SearchTerm to initial state
+  // "" and second arg is a function which updates the state setSearchTerm
   const [searchTerm, setSearchTerm] = React.useState("");
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
+    
+    props.onSearch(event);
   }
   return (
     <div>
@@ -59,11 +76,16 @@ const App = () => {
       objectID: 1,
     },
   ];
+
+  const handleSearch = (event) => {
+    console.log(event.target.value);
+  };
+
   return (
     <div>
       <h1>My Hacker Stories</h1>
 
-      <Search />
+      <Search onSearch={handleSearch} />
 
       <hr />
 
