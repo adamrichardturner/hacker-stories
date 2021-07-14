@@ -36,12 +36,15 @@ const Item = (props) => {
 
 const Search = (props) => {
   // Props is arg which in this case is an event handler onSearch
-  // Below const uses React.useState to set SearchTerm to initial state
-  // "" and second arg is a function which updates the state setSearchTerm
   return (
     <div>
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={props.onSearch}/>
+      <input 
+      id="search" 
+      type="text" 
+      onChange={props.onSearch}
+      value={props.search}    
+      />
 
     </div>
   )
@@ -66,8 +69,9 @@ const App = () => {
       objectID: 1,
     },
   ];
-
-  const[searchTerm, setSearchTerm] = React.useState("");
+  // Below const uses React.useState to set SearchTerm to initial state
+  // "" and second arg is a function which updates the state setSearchTerm
+  const [searchTerm, setSearchTerm] = React.useState("React");
   
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -80,7 +84,7 @@ const App = () => {
     <div>
       <h1>My Hacker Stories</h1>
 
-      <Search onSearch={handleSearch} />
+      <Search search={searchTerm} onSearch={handleSearch} />
 
       <hr />
 
