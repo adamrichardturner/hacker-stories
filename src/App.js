@@ -5,11 +5,11 @@ import * as React from 'react';
 // HTML with props arg (stories) each object
 // property displayed.
 
-const List = (props) => {
+const List = ({list}) => {
   return(
     <ul>
-    {props.list.map((item) => (
-      <Item key={item.objectID} item={item} />
+    {list.map((item) => (
+      <Item key={item.objectID} item={...item} />
     ))}
   </ul>
   )
@@ -19,14 +19,14 @@ const List = (props) => {
 // and returns the url, title, author, comments and points
 // of each object prop values in stories.
 
-const Item = (props) => {
+const Item = ({item}) => {
   return(
     <li>
     <span>
-      <a href={props.item.url}>{props.item.title}</a> </span>
-        <span>{props.item.author}</span>
-        <span>{props.item.num_comments}</span>
-        <span>{props.item.points}</span>
+      <a href={item.url}>{item.title}</a> </span>
+        <span>{item.author}</span>
+        <span>{item.num_comments}</span>
+        <span>{item.points}</span>
   </li>
   )
 }
@@ -34,7 +34,7 @@ const Item = (props) => {
 // Search takes props as arg onSearch={handleSearch}
 // Logging the search term beneath the input field
 
-const Search = (props) => {
+const Search = ({ search, onSearch }) => {
   // Props is arg which in this case is an event handler onSearch
   return (
     <div>
@@ -42,8 +42,8 @@ const Search = (props) => {
       <input 
       id="search" 
       type="text" 
-      onChange={props.onSearch}
-      value={props.search}    
+      onChange={onSearch}
+      value={search}    
       />
 
     </div>
