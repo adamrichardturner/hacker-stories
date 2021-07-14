@@ -9,7 +9,7 @@ const List = ({list}) => {
   return(
     <ul>
     {list.map((item) => (
-      <Item key={item.objectID} item={...item} />
+      <Item key={item.objectID} item={item} />
     ))}
   </ul>
   )
@@ -71,7 +71,13 @@ const App = () => {
   ];
   // Below const uses React.useState to set SearchTerm to initial state
   // "" and second arg is a function which updates the state setSearchTerm
-  const [searchTerm, setSearchTerm] = React.useState("React");
+  const [searchTerm, setSearchTerm] = React.useState(
+    localStorage.getItem('search') || 'React'
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem('search', searchTerm);
+  }, [searchTerm]);
   
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
